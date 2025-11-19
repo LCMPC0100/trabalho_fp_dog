@@ -12,6 +12,7 @@ def apenas_letras(pergunta):
             print("digite apenas letras.\n")
 
 
+
 def adicionar_animais():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -63,7 +64,49 @@ def visualizar_animais():
 
 
 
+def editar_animais():
+    os.system("cls" if os.name == "nt" else "clear")
+    print("    Editar Animal    ")
+    visualizar_animais()
+
+    while True:
+
+        try:
+            indice=int(input("Insira o indice que queira editar: "))
+            break
+
+        except ValueError:
+            print("Apenas numeros!\n")
+    
+    with open("animais.txt", "r", encoding="utf-8") as arquivo:
+        animais=arquivo.readlines()
+    
+    if 0 <= indice < len(animais):
+        dados = animais[indice].strip().split(",")
+        
+        print("\nDeixe em branco para manter o valor atual.")
+
+        nome = input(f"Nome ({dados[0]}): ")
+        especie = input(f"Espécie ({dados[1]}): ")
+        raca = input(f"Raça ({dados[2]}): ")
+        idade = input(f"Idade ({dados[3]}): ")
+        saude = input(f"Estado de saúde ({dados[4]}): ")
+        chegada = input(f"Data de Chegada (DD-MM-AAAA)({dados[5]}): ")
+        comportamento = input(f"Comportamento ({dados[6]}): ")
+
+        animais[indice] = f"{nome},{especie},{raca},{idade},{saude},{chegada},{comportamento}\n"
+
+        with open("animais.txt", "w", encoding="utf-8") as arquivo:
+            arquivo.writelines(animais)
+
+        print("Animal editado!")
+    else:
+        print("Índice inválido.")
+
+
+
 def excluir_animais():
+    os.system("cls" if os.name == "nt" else "clear")
     visualizar_animais()
 
     try:
@@ -167,7 +210,7 @@ def menu():
         print("[3] - Excluir Animais")
         print("[5] - Adicionar Cuidados")
         print("[6] - Cadastro de Tarefas")
-        print("[7] - editar")
+        print("[7] - Editar Animais")
         
         
 
@@ -190,8 +233,11 @@ def menu():
             adicionar_cuidados()
         elif opcao == 6:
             cadastro_tarefas()
+        elif opcao == 7:
+            editar_animais()
         else:
             print("Opção inválida!\n")
 
 
 menu()
+
