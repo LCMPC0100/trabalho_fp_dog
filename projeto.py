@@ -16,30 +16,29 @@ def apenas_letras(pergunta):
 def adicionar_animais():
     os.system("cls" if os.name == "nt" else "clear")
 
-    print("    Cadastro de Animal    ")
+    print("     Cadastro de Animal")
 
     nome = apenas_letras("Nome: ")
     especie = apenas_letras("Espécie: ")
     raca = apenas_letras("Raça: ")
 
-    
     while True:
-        
         try:
             idade = int(input("Idade: "))
             break
-        
         except ValueError:
             print("Apenas numeros!\n")
 
     saude = apenas_letras("Estado de saude: ")
-    chegada = input("Data de Chegada (DD-MM-AAAA): ")  
+    
+    chegada = input("Data de Chegada (DD-MM-AAAA): ") 
+     
     comportamento = apenas_letras("Comportamento: ")
 
     with open("animais.txt", "a", encoding="utf-8") as arquivo:
         arquivo.write(f"{nome},{especie},{raca},{idade},{saude},{chegada},{comportamento}\n")
 
-    print("Animal Registrado com sucesso!\n")
+    print("animal registrado com sucesso!\n")
 
 
 
@@ -47,7 +46,6 @@ def visualizar_animais():
     os.system("cls" if os.name == "nt" else "clear")
 
     try:
-        
         with open("animais.txt", "r", encoding="utf-8") as arquivo:
             linhas = arquivo.readlines()
 
@@ -66,15 +64,14 @@ def visualizar_animais():
 
 def editar_animais():
     os.system("cls" if os.name == "nt" else "clear")
-    print("    Editar Animal    ")
+    print("     Editar Animal ")
     visualizar_animais()
 
     while True:
-
         try:
             indice=int(input("Insira o indice que queira editar: "))
             break
-
+        
         except ValueError:
             print("Apenas numeros!\n")
     
@@ -84,7 +81,7 @@ def editar_animais():
     if 0 <= indice < len(animais):
         dados = animais[indice].strip().split(",")
         
-        print("\nDeixe em branco para manter o valor atual.")
+        print("\n deixe em branco para manter o valor atual.")
 
         nome = input(f"Nome ({dados[0]}): ")
         especie = input(f"Espécie ({dados[1]}): ")
@@ -101,7 +98,7 @@ def editar_animais():
 
         print("Animal editado!")
     else:
-        print("Índice inválido.")
+        print("Indice invalido.")
 
 
 
@@ -110,15 +107,12 @@ def excluir_animais():
     visualizar_animais()
 
     try:
-        
-        indice = int(input("\nQual animal deseja excluir? "))
-        
+        indice = int(input("\n Qual animal deseja excluir ? "))
     except ValueError:
-        print("Apenas números!")
+        print("Apenas numeros !")
         return
 
     try:
-        
         with open("animais.txt", "r", encoding="utf-8") as arquivo:
             animais = arquivo.readlines()
 
@@ -134,7 +128,7 @@ def excluir_animais():
 
             print("Animal removido com sucesso!")
         else:
-            print("Índice inválido.")
+            print("Indice invalido.")
 
     except FileNotFoundError:
         print("Arquivo não encontrado.\n")
@@ -142,11 +136,11 @@ def excluir_animais():
 
 
 def adicionar_cuidados():
+    
     os.system("cls" if os.name == "nt" else "clear")
-    print("=== Adicionar Cuidados ===")
+    print("adicionar Cuidados")
 
     try:
-        
         with open("animais.txt", "r", encoding="utf-8") as arquivo:
             animais = arquivo.readlines()
             
@@ -158,7 +152,6 @@ def adicionar_cuidados():
         print("Nenhum animal registrado.")
         return
 
-   
     for i, linha in enumerate(animais):
         dados = linha.strip().split(",")
         print(f"{i} - {dados[0]} ({dados[1]})")
@@ -167,11 +160,11 @@ def adicionar_cuidados():
         indice = int(input("Selecione o animal: "))
         
     except ValueError:
-        print("Apenas números!")
+        print("Apenas numeros!")
         return
 
     if not (0 <= indice < len(animais)):
-        print("Índice inválido!")
+        print("Índice invalido !")
         return
 
     cuidado = input("Descreva o cuidado: ")
@@ -184,12 +177,16 @@ def adicionar_cuidados():
 
 
 def cadastro_tarefas():
+    
     os.system("cls" if os.name == "nt" else "clear")
-    print("=== Cadastro de Tarefas ===")
+    print("Cadastro de Tarefas ")
 
     titulo = input("Titulo da tarefa: ")
-    descricao = input("Descrição: ")
-    responsavel = input("Responsável: ")
+    
+    descricao = input("Descriçao: ")
+    
+    responsavel = input("Responsavel: ")
+    
     data = input("Data (DD-MM-AAAA): ")
 
     with open("tarefas.txt", "a", encoding="utf-8") as arquivo:
@@ -199,26 +196,86 @@ def cadastro_tarefas():
 
 
 
+def imprimir_gato():
+    # Esqueci de fazer esse negocio e agora sao quase 3 da manha ;-;
+    
+    os.system("cls" if os.name == "nt" else "clear")
+
+    gato = r"""
+                                 #######         
+                               ###     ####      
+                             ###          ##     
+                           ##      #       ##    
+             #####   ######         #      ##    
+             # #  ####   ########    #     ##    
+             #  ##  #          ##### #     ##    
+            ##   ## ##             ####     #    
+            ##    ##  #####          ##     #    
+             ##  ##        ##         #      #   
+              ##             ###       #     #   
+           ####                #####   ##    ##  
+           ###     #####      #######   ##   ##  
+    ##     ##    ## #####    # ### ####  ##  #   
+    #####  ###   ## ###  #   # ### ## ########   
+    #   ##   ##    #####      #####     #### ### 
+    #     #   ##         ####          # #     ##
+   ##     ##   ##     #   ##   #     ##  #     ##
+   ##      #     ####  ########   ####    ## ### 
+    #      #        ###         ###        ####  
+     #     ##         ##########                 
+      ##     ### #####  #   #  ##                
+       ###     ###       ###    #                
+         ######                 ##               
+              ##             # ##                
+              #      ###    # ##                 
+              ##     ###   ## #                  
+               ##    # ##  ### #                 
+                #     ##    # ###                
+                #### ##### #####                 
+                   ###   ###                     
+
+
+███████╗███████╗██╗     ██╗███████╗    ███╗   ██╗ █████╗ ████████╗ █████╗ ██╗     
+██╔════╝██╔════╝██║     ██║██╔════╝    ████╗  ██║██╔══██╗╚══██╔══╝██╔══██╗██║     
+█████╗  █████╗  ██║     ██║█████╗      ██╔██╗ ██║███████║   ██║   ███████║██║     
+██╔══╝  ██╔══╝  ██║     ██║██╔══╝      ██║╚██╗██║██╔══██║   ██║   ██╔══██║██║     
+██║     ███████╗███████╗██║███████╗    ██║ ╚████║██║  ██║   ██║   ██║  ██║███████╗
+╚═╝     ╚══════╝╚══════╝╚═╝╚══════╝    ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝
+    """
+
+    print(gato)
+
+
+
+
 def menu():
+    
     
     while True:
         
-        print("=== Gerenciamento de Animais ===")
+        print(" Gerenciamento de Animais")
+        
         print("[0] - Sair")
+        
         print("[1] - Adicionar Animais")
+        
         print("[2] - Visualizar Animais")
-        print("[3] - Excluir Animais")
+        
+        print("[3] - excluir Animais")
+        
         print("[5] - Adicionar Cuidados")
+        
         print("[6] - Cadastro de Tarefas")
+        
         print("[7] - Editar Animais")
         
+        print("[8] -  Mostrar Gato Natalino")   
         
-
         try:
-            opcao = int(input("-> "))
+            opcao = int(input("\n -> "))
             
         except ValueError:
-            print("Apenas números!\n")
+            print("Apenas numeros!\n")
             continue
 
         if opcao == 0:
@@ -235,8 +292,10 @@ def menu():
             cadastro_tarefas()
         elif opcao == 7:
             editar_animais()
+        elif opcao == 8:
+            imprimir_gato()
         else:
-            print("Opção inválida!\n")
+            print("Opçao invlaida!\n")
 
 
 menu()
