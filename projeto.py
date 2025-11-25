@@ -45,20 +45,66 @@ def adicionar_animais():
 def visualizar_animais():
     os.system("cls" if os.name == "nt" else "clear")
 
+
     try:
-        with open("animais.txt", "r", encoding="utf-8") as arquivo:
-            linhas = arquivo.readlines()
-
-        if not linhas:
-            print("Nenhum animal registrado.\n")
-            return
-
-        for indice, linha in enumerate(linhas):
-            dados = linha.strip().split(",")
-            print(f"{indice} - Nome: {dados[0]} | Espécie: {dados[1]} | Raça: {dados[2]} | Idade: {dados[3]} | Saúde: {dados[4]} | Chegada: {dados[5]} | Comportamento: {dados[6]}")
-
+        with open("animais.txt", "r", encoding="utf-8") as arq:
+            animais = arq.readlines()
+            
     except FileNotFoundError:
-        print("Arquivo de animais não encontrado.\n")
+        print("Nenhum animal registrado.\n")
+        return
+
+    if not animais:
+        print("nenhum animal registrado.\n")
+        return
+
+    
+    cuidados = {}
+    try:
+        with open("cuidados.txt", "r", encoding="utf-8") as arq:
+            for linha in arq:
+                ind, cuidado = linha.strip().split(",", 1)
+                ind = int(ind)
+                cuidados.setdefault(ind, []).append(cuidado)
+                
+    except FileNotFoundError:
+        pass
+
+    
+    try:
+        with open("tarefas.txt", "r", encoding="utf-8") as arq:
+            tarefas = [linha.strip() for linha in arq]
+            
+    except FileNotFoundError:
+        tarefas = []
+
+    print(" Lista de Animais \n")
+
+    for i, linha in enumerate(animais):
+        nome, especie, raca, idade, saude, chegada, comportamento = linha.strip().split(",")
+
+        print(f"{i} - {nome} | {especie} | {raca} | {idade} anos | Saúde: {saude} | Chegada: {chegada} | Comportamento: {comportamento}")
+
+        
+        print("   cuidados:")
+        if i in cuidados:
+            for c in cuidados[i]:
+                print(f"      - {c}")
+                
+        else:
+            print("  None")
+
+        
+        print("   Tarefas:")
+        if tarefas:
+            for t in tarefas:
+                print(f"      - {t}")
+                
+        else:
+            print("  None")
+
+        print()
+
 
 
 
@@ -320,5 +366,6 @@ menu()
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠶⢤⣄⣀⣀⣀⣀⣀⡤⠴⠚⠁
 
 """
+
 
 
